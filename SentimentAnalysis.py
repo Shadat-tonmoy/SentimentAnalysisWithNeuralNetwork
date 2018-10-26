@@ -183,7 +183,7 @@ class SentimentNetwork:
         # self.weights_1_2 = np.zeros((hidden_nodes, output_nodes))
         self.weights_1_2 = np.random.normal(0.0, self.output_nodes ** -0.5,
                                             (self.hidden_nodes, self.output_nodes))
-        print("Weight 1_2",self.weights_1_2)
+        # print("Weight 1_2",self.weights_1_2)
 
         # TODO: Create the input layer, a two-dimensional matrix with shape
         #       1 x input_nodes, with all values initialized to zero
@@ -207,7 +207,7 @@ class SentimentNetwork:
         # print(("Word2Index",self.word2index.shape))
         for word in review.split(" "):
             if (word in self.word2index.keys()):
-                self.layer_0[0][self.word2index[word]] += 1
+                self.layer_0[0][self.word2index[word]] = 1
         # print(self.word2index)
         # print("TotalWordInReview ",len(review.split(" ")))
         # print(self.layer_0)
@@ -234,7 +234,7 @@ class SentimentNetwork:
 
     def train(self, training_reviews, training_labels):
 
-        print(("totalReview",len(training_reviews)," Total Labels ",len(training_labels)))
+        # print(("totalReview",len(training_reviews)," Total Labels ",len(training_labels)))
         # make sure out we have a matching number of reviews and labels
         assert (len(training_reviews) == len(training_labels))
 
@@ -408,4 +408,4 @@ print(("totalReview",len(reviews)," Total Labels ",len(labels)))
 mlp = SentimentNetwork(reviews[:-1000],labels[:-1000])
 # mlp = SentimentNetwork(reviews[0:5],labels[0:5], learning_rate=0.1)
 # mlp.test(reviews[-1000:],labels[-1000:])
-# mlp.train(reviews[:-1000],labels[:-1000])
+mlp.train(reviews[:-1000],labels[:-1000])
